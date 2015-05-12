@@ -7,14 +7,16 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Game g = new Game();
+		Scanner s = new Scanner(System.in);
 		
 		welcomeUser();
-		firstMenu(g);
-		secondMenu(g);
+		firstMenu(g,s);
+		secondMenu(g,s);
+		
+		s.close();
 	}
 	
-	private static void secondMenu(Game g) {
-		Scanner s = new Scanner(System.in);
+	private static void secondMenu(Game g, Scanner s) {
 		int m = 0;
 		while(m!=3) {
 			System.out.println("******************************************************************************************");
@@ -24,17 +26,19 @@ public class Main {
 			System.out.println("1 - Add a mission");
 			System.out.println("2 - Remove last mission");
 			System.out.println("3 - End the game");
-			System.out.println("\n Current players with blue probability");
+			System.out.println("\nCurrent players with blue probability");
 			printPlayersAndProba(g);
 			System.out.println("\nYour choice");
 			
 			m = s.nextInt();
 			switch(m) {
 			case 1:
+				// TODO
 				System.out.println("\nType the name of the player :");
 				g.addPlayer(s.nextLine());
 				break;
 			case 2:
+				// TODO
 				System.out.println("\nType the name of the player :");
 				g.removePlayer(s.nextLine());
 				break;
@@ -52,8 +56,7 @@ public class Main {
 		if(g.getPlayers()!=null) for(Character c : g.getPlayers()) System.out.println(c.getName() + "\t - \t" + c.getProbaB() * 100 + " %");
 	}
 
-	private static void firstMenu(Game g) {
-		Scanner s = new Scanner(System.in);
+	private static void firstMenu(Game g, Scanner s) {
 		int m = 0;
 		while(m!=3) {
 			System.out.println("******************************************************************************************");
@@ -92,7 +95,6 @@ public class Main {
 				System.out.println("\nIncorrect choice\n");
 			}
 		}
-		s.close();
 	}
 
 	public static void printPlayers(Game g) {
