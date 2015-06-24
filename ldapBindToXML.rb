@@ -19,7 +19,9 @@ filter = Net::LDAP::Filter.eq("objectclass", "person") &  Net::LDAP::Filter.pres
 csvGroup = ""
 ldap.search(:base => base, :filter => filter) do |object|
   object[:memberOf].to_a.each do |group|
-    csvGroup << object[:cn][0] << "=" << group.split("=")[1].split(',')[0] << ";"
+    user_name = object[:cn][0]
+    group_name = group.split("=")[1].split(',')[0]
+    csvGroup << user_name << "=" << group_name << ";"
   end
 end
 
@@ -34,21 +36,16 @@ topology['gateway'][0]['provider'].each do |provider|
           params['value'][0] = csvGroup
         end
         break
-      else
-        next
       end
     end
-  else
-    next
   end
 end
 
 if csvGroup != groupMapping
-  File.open(topoFile, 'w') do |file| 
-    file.write( XmlSimple.xml_out(topology))
+  File.open(topoFile, 'w') do |file|
+    file.write(XmlSimple.xml_out(topology).gsub("opt>", "topology>"))
     file.close
   end
-  `sed -i "s/opt>/topology>/" #{topoFile}`
   `find /usr/hdp -iname 'gateway.sh' -exec {} stop \\;`
   `find /usr/hdp -iname 'gateway.sh' -exec {} start \\;`
 end
