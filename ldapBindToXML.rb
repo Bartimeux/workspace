@@ -48,7 +48,7 @@ if csvGroup != groupMapping
     file.write( XmlSimple.xml_out(topology))
     file.close
   end
-  `sed -i s/opt>/topology>/ #{topoFile}`
+  `sed -i "s/opt>/topology>/" #{topoFile}`
   `find /usr/hdp -iname 'gateway.sh' -exec {} stop \\;`
   `find /usr/hdp -iname 'gateway.sh' -exec {} start \\;`
 end
