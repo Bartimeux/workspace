@@ -6,9 +6,12 @@ raise "Configuration file #{CONF_FILE} not found" unless File.readable? CONF_FIL
 CONF = JSON.parse(IO.read(CONF_FILE), :symbolize_names => true)
 
 # Aller lire le fichier qui liste les repo à resigner
+repolist = File.read('repo_to_resign')
 repolist.each do |repo|
-  Dir["/DATA/repositories/#{repo}/**/*.rpm"].each do |rpm|
+  next if line.include? "#"
+  next if line.empty?
 
+  Dir["/DATA/repositories/#{repo}/**/*.rpm"].each do |rpm|
     begin
       raise "#{rpm} not found" unless File.exist? rpm
       log "Signing #{rpm}"
@@ -36,4 +39,3 @@ repolist.each do |repo|
     end
   end
 end
-
