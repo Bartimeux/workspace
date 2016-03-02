@@ -1,0 +1,13 @@
+---
+destinataires::mails:
+  ribault.alnour@gmail.com:
+    - subject: ''
+    - body: ''
+
+  laurenne.besson@gmail.com:
+    - subject:
+    - body: ''
+    
+  chloe.pero@laposte.net:
+    - subject: ''
+    - body: ''
