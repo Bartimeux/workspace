@@ -1,11 +1,15 @@
 require 'gmail'
 require 'yaml'
-
+require 'date'
 
 remaining_days = File.read('safebox_remaining_days')
 params = YAML.load_file('configuration.yaml')
 
 Gmail.new(params['user_name'], params['password']) do |gmail|
+
+  puts gmail.mailbox('Sent').count
+  # puts gmail.mailbox('Sent').count(:after => Date.parse(Date.today.prev_day.strftime('%Y-%m-%d')))
+
 
   gmail.deliver do
     to "loic.chanel@telecomnancy.net"
