@@ -1,0 +1,5 @@
+# Run the checks
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+15 14 * * * root /usr/bin/ruby /root/workspace/mail-safebox/docs/mail-checker.rb

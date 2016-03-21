@@ -1,0 +1,5 @@
+# Run the dirty job
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+0 16 * * * root /usr/bin/ruby /root/workspace/mail-safebox/docs/reset-or-release.rb
