@@ -6,7 +6,6 @@ remaining_days = File.read('safebox_remaining_days')
 params = YAML.load_file('configuration.yaml')
 
 yesterday = Date.today.prev_day
-tomorrow = Date.today + 1
 
 Gmail.new(params['mailbox']['user_name'], params['mailbox']['password']) do |gmail|
   return File.write('safebox_remaining_days', 30) if gmail.label("[Gmail]/Messages envoy&AOk-s").count(:after => Date.parse(yesterday.strftime('%Y-%m-%d'))) == 0
